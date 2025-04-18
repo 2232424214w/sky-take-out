@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class JwtUtil {
@@ -21,6 +22,7 @@ public class JwtUtil {
     public static String createJWT(String secretKey, long ttlMillis, Map<String, Object> claims) {
         // 指定签名的时候使用的签名算法，也就是header那部分
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
 
         // 生成JWT的时间
         long expMillis = System.currentTimeMillis() + ttlMillis;
@@ -38,6 +40,7 @@ public class JwtUtil {
         return builder.compact();
     }
 
+    
     /**
      * Token解密
      *

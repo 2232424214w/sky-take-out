@@ -95,4 +95,58 @@ public class EmployeeController {
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);//后续定义
         return Result.success(pageResult);
     }
+
+    /**
+     * 根据id查询员工
+     * @param id
+     * @return
+     */
+
+
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工")
+    public Result<Employee> getByid(@PathVariable Long id)
+    {
+                Employee employee=employeeService.getByid(id);
+                return Result.success(employee);
+
+    }
+
+
+    /**
+     * 更新员工信息
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    public Result update(@RequestBody EmployeeDTO employeeDTO)
+    {
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
+
+    /**
+     * 更改员工账号状态
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public Result setstatus(@PathVariable Integer status,@RequestParam Long id)
+    {
+        employeeService.setstatus(status,id);
+
+
+
+        return Result.success();
+    }
+
+
+
+
+
+
+
+
+
 }

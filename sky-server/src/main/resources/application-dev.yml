@@ -10,3 +10,8 @@ sky:
     host: localhost
     port: 6379
     database: 0
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tCXQvEmeSctuzE38GCG
+    access-key-secret: RPB2HmlTi6I1douo5f0rw0rOuNMPnG
+    bucket-name: huxi-take-out

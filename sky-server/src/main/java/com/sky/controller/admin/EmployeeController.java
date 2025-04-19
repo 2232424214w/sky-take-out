@@ -4,6 +4,7 @@ import com.sky.constant.JwtClaimsConstant;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
 import com.sky.result.PageResult;
@@ -14,10 +15,7 @@ import com.sky.vo.EmployeeLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -75,6 +73,11 @@ public class EmployeeController {
         return Result.success();
     }
 
+    /**
+     * 新增员工
+     * @param employeeDTO
+     * @return
+     */
     @PostMapping
     public Result addEmployee(@RequestBody EmployeeDTO employeeDTO) {
         employeeService.addEmployee(employeeDTO);
@@ -96,13 +99,14 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
 
+
+
+
     /**
      * 根据id查询员工
      * @param id
      * @return
      */
-
-
     @GetMapping("/{id}")
     @ApiOperation("根据id查询员工")
     public Result<Employee> getByid(@PathVariable Long id)
@@ -142,9 +146,21 @@ public class EmployeeController {
     }
 
 
+    /**
+     * 修改密码
+     * @param passwordEditDTO
+     * @return
+     */
+    @PutMapping("/editPassword")
+    public Result editPassword(@RequestBody PasswordEditDTO passwordEditDTO)
+    {
+
+            employeeService.editPassword(passwordEditDTO);
 
 
 
+    return Result.success();
+    }
 
 
 

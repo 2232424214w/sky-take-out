@@ -1,6 +1,5 @@
 package com.sky.service.impl;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
@@ -9,9 +8,11 @@ import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
 import com.sky.exception.AccountNotFoundException;
+import com.sky.exception.PasswordEditFailedException;
 import com.sky.exception.PasswordErrorException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.result.PageResult;
@@ -142,12 +143,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.update(employee);
     }
 
-
-
-
-
-
-
+    /**
+     * 修改密码
+     * @param passwordEditDTO
+     */
+    public void editPassword(PasswordEditDTO passwordEditDTO) {
+        Long id=passwordEditDTO.getEmpId();
+        Employee employee=employeeMapper.getByid(id);
+        String password=passwordEditDTO.getOldPassword();
+        password=DigestUtils.md5DigestAsHex(password.getBytes());
+        if(!password.equals(employee.getPassword()))
+        {
+            throw new PasswordEditFailedException("原密码错误，重新输入密码");
+        }
+        password=passwordEditDTO.getNewPassword();
+        password=DigestUtils.md5DigestAsHex(password.getBytes());
+        employee.setPassword(password);
+        employeeMapper.update(employee);
+    }
 
 
 }

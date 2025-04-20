@@ -10,10 +10,7 @@ import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
 import com.sky.exception.DeletionNotAllowedException;
-import com.sky.mapper.CategoryMapper;
-import com.sky.mapper.DishFlavorMapper;
-import com.sky.mapper.DishMapper;
-import com.sky.mapper.SetmealDishMapper;
+import com.sky.mapper.*;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
@@ -38,7 +35,8 @@ public class DishServiceImpl implements DishService {
     private SetmealDishMapper setMealDishMapper;
     @Autowired
     private CategoryMapper categoryMapper;
-
+    @Autowired
+    private SetmealMapper setmealMapper;
     /**
      * 新增菜品和对应的口味
      *
@@ -149,6 +147,21 @@ public class DishServiceImpl implements DishService {
         }
 
 
+
+
+    }
+
+    /**
+     * 菜品的起售停售
+     * @param status
+     * @param id
+     */
+    public void changeStatusById(Integer status, Long id) {
+        //修改当前菜品的状态
+        dishMapper.setStatusById(status,id);
+        //修改包含当前菜品的套餐的状态
+        if (status.equals(StatusConstant.DISABLE) ){ List<Long> setmealIds = setMealDishMapper.getSetmealIdsByDishId(id);
+            if (setmealIds != null && !setmealIds.isEmpty()){setmealMapper.updateStatus(status,setmealIds);}}
 
 
     }

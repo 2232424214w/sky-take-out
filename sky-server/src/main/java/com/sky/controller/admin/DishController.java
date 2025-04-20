@@ -98,8 +98,14 @@ public class DishController {
         return Result.success();
     }
 
+    @PostMapping("/status/{status}")
+    public Result yesOrNo(@PathVariable Integer status,@RequestParam Long id)
+    {
+        dishService.changeStatusById(status,id);
 
 
+        return Result.success();
+    }
 
 
 }

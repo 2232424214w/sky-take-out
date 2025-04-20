@@ -12,6 +12,6 @@ sky:
     database: 0
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
-    access-key-id: ${ALICLOUD_ACCESS_KEY_ID:default_key_id}
-    access-key-secret: ${ALICLOUD_ACCESS_KEY_SECRET:default_secret}
+    access-key-id: ${ALICLOUD_ACCESS_KEY_ID}
+    access-key-secret: ${ALICLOUD_ACCESS_KEY_SECRET}
     bucket-name: huxi-take-out

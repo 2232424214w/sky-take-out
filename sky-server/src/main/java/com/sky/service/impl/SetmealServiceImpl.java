@@ -12,6 +12,7 @@ import com.sky.entity.SetmealDish;
 import com.sky.exception.DeletionNotAllowedException;
 import com.sky.exception.SetmealEnableFailedException;
 import com.sky.mapper.CategoryMapper;
+import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
@@ -34,7 +35,8 @@ public class SetmealServiceImpl implements SetmealService {
     private CategoryMapper categoryMapper;
     @Autowired
     private SetmealDishMapper setmealDishMapper;
-
+    @Autowired
+    private DishMapper dishMapper;
     /**
      * 修改套餐
      * @param setmealDTO
@@ -75,7 +77,7 @@ public class SetmealServiceImpl implements SetmealService {
          *    套餐和菜品的关联关系
          *     private List<SetmealDish> setmealDishes = new ArrayList<>();
          */
-        setmealVO.setSetmealDishes( setmealDishMapper.getByCategoryId(id));
+        setmealVO.setSetmealDishes( setmealDishMapper.getBySetmealId(id));
 
 
         return setmealVO;

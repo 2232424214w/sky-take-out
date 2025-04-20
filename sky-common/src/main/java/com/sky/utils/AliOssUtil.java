@@ -7,6 +7,7 @@ import com.aliyun.oss.OSSException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayInputStream;
 
 @Data
@@ -64,5 +65,36 @@ public class AliOssUtil {
         log.info("文件上传到:{}", stringBuilder.toString());
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * 根据文件路径删除文件
+     * @param objectName
+     */
+    public void delete(String objectName) {
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        try {
+            // 1. 基础校验
+            if (objectName.isEmpty()) {
+                throw new IllegalArgumentException("Object name cannot be empty");
+            }
+
+            // 2. 执行删除（若文件不存在会抛出 NoSuchKey 异常）
+            ossClient.deleteObject(bucketName, objectName);
+            log.info("OSS 文件删除成功：{}", objectName);
+
+        } catch (OSSException oe) {
+            // 3.1 处理 OSS 服务端异常
+            log.error("OSS 服务端异常：Code={}, Message={}", oe.getErrorCode(), oe.getErrorMessage());
+            throw new RuntimeException("OSS 删除失败：" + oe.getErrorMessage());
+        } catch (ClientException ce) {
+            // 3.2 处理客户端网络异常
+            log.error("OSS 客户端异常：{}", ce.getMessage());
+            throw new RuntimeException("网络连接异常：" + ce.getMessage());
+        } finally {
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
     }
 }

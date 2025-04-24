@@ -1,0 +1,1 @@
+select * from student where name like concat('%',#{name},'%')

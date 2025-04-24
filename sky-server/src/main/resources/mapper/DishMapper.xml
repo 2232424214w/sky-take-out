@@ -23,7 +23,7 @@
         where id = #{id}
     </update>
 
-    <select id="pageQuery" resultType="com.sky.vo.DishVO">
+    <select id="pageQuery" resultType="DishVO">
         select d.* , c.name as categoryName from dish d left outer join category c on d.category_id = c.id
         <where>
             <if test="name != null">

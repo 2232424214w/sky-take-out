@@ -16,7 +16,7 @@
         where id = #{id}
     </update>
 
-    <select id="pageQuery" resultType="com.sky.entity.Category">
+    <select id="pageQuery" resultType="Category">
         select * from category
         <where>
             <if test="name != null and name != ''">
@@ -28,7 +28,7 @@
         </where>
         order by sort asc , create_time desc
     </select>
-    <select id="getByType" resultType="com.sky.entity.Category">
+    <select id="getByType" resultType="Category">
 
         select * from category
         <where>

@@ -4,6 +4,8 @@ import com.sky.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface OrderMapper {
     /**
@@ -24,4 +26,9 @@ public interface OrderMapper {
      * @param orders
      */
     void update(Orders orders);
+    /**
+     * 根据用户id查询订单
+     */
+    @Select("select * from orders where user_id=#{id}")
+    List<Orders> getByUserId(Long id);
 }

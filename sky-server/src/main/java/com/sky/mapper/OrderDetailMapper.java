@@ -18,6 +18,6 @@ public interface OrderDetailMapper {
     /**
      * 根据用户id和订单号查询订单明细
      */
-    @Select("select * from order_detail where order_id=Oid")
+    @Select("select * from order_detail where order_id=#{Oid}")
     List<OrderDetail> getByOrderId(Long Oid);
 }

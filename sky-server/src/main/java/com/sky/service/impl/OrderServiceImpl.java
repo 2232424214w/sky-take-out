@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sky.constant.MessageConstant;
 import com.sky.context.BaseContext;
-import com.sky.dto.HistroyOrdersDTO;
+import com.sky.dto.HistoryOrdersDTO;
 import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
 import com.sky.entity.*;
@@ -16,7 +16,7 @@ import com.sky.mapper.*;
 import com.sky.result.PageResult;
 import com.sky.service.OrderService;
 import com.sky.utils.WeChatPayUtil;
-import com.sky.vo.HistroyOrdersVO;
+import com.sky.vo.HistoryOrdersVO;
 import com.sky.vo.OrderPaymentVO;
 import com.sky.vo.OrderSubmitVO;
 import lombok.extern.slf4j.Slf4j;
@@ -158,19 +158,19 @@ public class OrderServiceImpl implements OrderService {
 
 
 
-    public PageResult getHistroyOrders(HistroyOrdersDTO histroyOrdersDTO) {
+    public PageResult getHistroyOrders(HistoryOrdersDTO historyOrdersDTO) {
         PageResult pageResult=new PageResult();
-        HistroyOrdersVO histroyOrdersVO=new HistroyOrdersVO();
+        HistoryOrdersVO histroyOrdersVO=new HistoryOrdersVO();
         //先根据用户id查询他的所有订单
-        PageHelper.startPage(histroyOrdersDTO.getPage(),histroyOrdersDTO.getPageSize());
+        PageHelper.startPage(historyOrdersDTO.getPage(), historyOrdersDTO.getPageSize());
         List<Orders> orders = orderMapper.getByUserId(BaseContext.getCurrentId());
         PageInfo<Orders> pageInfo = new PageInfo<>(orders);
 
-        List<HistroyOrdersVO>histroyOrdersVOS=new ArrayList<>();
+        List<HistoryOrdersVO>histroyOrdersVOS=new ArrayList<>();
         //根据用户的id和每一个订单号得到每一个订单的明细
         for(Orders o:orders)
         {
-            HistroyOrdersVO h=new HistroyOrdersVO();
+            HistoryOrdersVO h=new HistoryOrdersVO();
             BeanUtils.copyProperties(o,h);
             //根据用户Id和订单号查询订单明细
             List<OrderDetail> orderDetails = orderDetailMapper.getByOrderId(o.getId());

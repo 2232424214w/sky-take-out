@@ -1,6 +1,6 @@
 package com.sky.service;
 
-import com.sky.dto.HistroyOrdersDTO;
+import com.sky.dto.HistoryOrdersDTO;
 import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
 import com.sky.result.PageResult;
@@ -30,8 +30,8 @@ public interface OrderService {
 
     /**
      * 历史订单查询
-     * @param histroyOrdersDTO
+     * @param historyOrdersDTO
      * @return
      */
-    PageResult getHistroyOrders(HistroyOrdersDTO histroyOrdersDTO);
+    PageResult getHistroyOrders(HistoryOrdersDTO historyOrdersDTO);
 }

@@ -3,7 +3,7 @@ package com.sky.dto;
 import lombok.Data;
 
 @Data
-public class HistroyOrdersDTO {
+public class HistoryOrdersDTO {
 
     private int page;
     private int pageSize;

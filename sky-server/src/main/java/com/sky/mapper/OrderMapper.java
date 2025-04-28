@@ -46,4 +46,11 @@ public interface OrderMapper {
     Orders getById(Long id);
 
     List<Orders> list(OrdersPageQueryDTO ordersPageQueryDTO);
+
+    /**
+     * 根据状态统计订单数量
+     * @param status
+     */
+    @Select("select count(id) from orders where status = #{status}")
+    Integer countStatus(Integer status);
 }

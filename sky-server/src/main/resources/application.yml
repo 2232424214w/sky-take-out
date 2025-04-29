@@ -59,3 +59,7 @@ sky:
     weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath}
     notifyUrl: ${sky.wechat.notifyUrl}
     refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
+  shop:
+    address: 重庆市沙坪坝区重庆大学虎溪校区竹园
+  baidu:
+    ak: Zh8h3EIcCKQZ066wSgbFav8Xvw5sljCl
